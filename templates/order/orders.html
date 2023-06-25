@@ -1,0 +1,46 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Студент</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Позиции</th>
+            <th scope="col">Дата</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <th scope="row">{{ order.id }}</th>
+                <td>{{ order.student }}</td>
+                <td>{{ order.status }}</td>
+                <td>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Продукт</th>
+                            <th>Кол-во</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in order.order_items.all %}
+                            <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+                <td>{{ order.created_at }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}
